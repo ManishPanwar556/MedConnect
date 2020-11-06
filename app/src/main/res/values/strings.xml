@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MedConnect</string>
+    <string name="facebook_application_id" translatable="false">820674552054580</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb820674552054580</string>
+</resources>

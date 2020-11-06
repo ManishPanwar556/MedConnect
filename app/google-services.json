@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "736973347140",
+    "firebase_url": "https://medconnect-13bfa.firebaseio.com",
+    "project_id": "medconnect-13bfa",
+    "storage_bucket": "medconnect-13bfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736973347140:android:feea5ad5ab075ddbbd9f11",
+        "android_client_info": {
+          "package_name": "com.example.medconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736973347140-a67tmf7t4q5s7mhtvh2b5t2jbmqi95e5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANS47hbnO_VFzFCUbcQ_eRUHtYpdIJGU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736973347140-a67tmf7t4q5s7mhtvh2b5t2jbmqi95e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
