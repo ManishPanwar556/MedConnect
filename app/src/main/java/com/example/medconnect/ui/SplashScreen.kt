@@ -1,10 +1,11 @@
-package com.example.medconnect
+package com.example.medconnect.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import com.example.medconnect.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,7 +37,7 @@ class SplashScreen : AppCompatActivity() {
                     })
                 }
                 else{
-                    startActivity(Intent(this@SplashScreen,IntroActivity::class.java))
+                    startActivity(Intent(this@SplashScreen, IntroActivity::class.java))
                     finish()
                 }
             }
@@ -50,11 +51,11 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
         }
         else if(category.equals("Patient")){
-            val intent= Intent(this,PatientActivity::class.java)
+            val intent= Intent(this, PatientActivity::class.java)
             startActivity(intent)
         }
         else{
-            val intent= Intent(this,DoctorActivity::class.java)
+            val intent= Intent(this, DoctorActivity::class.java)
             startActivity(intent)
         }
         finish()

@@ -1,4 +1,4 @@
-package com.example.medconnect
+package com.example.medconnect.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -6,13 +6,17 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.firebase.ui.auth.AuthUI
+import androidx.lifecycle.Observer
+import com.example.medconnect.R
+import com.example.medconnect.room.UserEntity
+import com.example.medconnect.viewModel.UserViewModel
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,14 +30,37 @@ class PatientActivity : AppCompatActivity() {
     companion object {
         const val REQUEST_IMAGE_CAPTURE = 1
     }
+    val viewModel by lazy {
+        UserViewModel(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient)
-        val scanImages = findViewById<FloatingActionButton>(R.id.scanBarCode)
-        scanImages.setOnClickListener {
-            openCamera()
+        viewModel.properties.observe(this, Observer {list->
+            list.forEach {
+                applyData(it.name,it.address,it.contact,it.date,it.age,it.sex,it.time)
+            }
+
+        })
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.barCode ->{
+                openCamera()
+                true
+            }
+            else ->{
+                super.onOptionsItemSelected(item)
+            }
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater=menuInflater
+        inflater.inflate(R.menu.menu_item,menu)
+        return true
     }
 
     private fun openCamera() {
@@ -76,22 +103,24 @@ class PatientActivity : AppCompatActivity() {
 
         if (displayValue != null) {
             val firebaseDatabase =
-                FirebaseDatabase.getInstance().getReference().child("$displayValue")
+                FirebaseDatabase.getInstance().getReference().child("Patients").child("$displayValue")
             firebaseDatabase.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val name = snapshot.child("name").value?.toString()
-                    val address = snapshot.child("address").value.toString()
+                    val name=snapshot.child("name").value?.toString()
+                    val address = snapshot.child("address").value?.toString()
                     val contact = snapshot.child("contact").value?.toString()
                     val date = snapshot.child("date").value?.toString()
                     val age = snapshot.child("age").value?.toString()
                     val sex = snapshot.child("sex").value?.toString()
                     val time = snapshot.child("time").value?.toString()
-                    applyData(name,address,contact,date,age,sex,time)
+                    Toast.makeText(this@PatientActivity,"$name",Toast.LENGTH_SHORT).show()
+                    val user=UserEntity(name,sex,address,contact,time,age,date,displayValue)
+                    viewModel.insertData(user)
 
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                   Toast.makeText(this@PatientActivity,"${error}",Toast.LENGTH_LONG).show()
                 }
 
             })

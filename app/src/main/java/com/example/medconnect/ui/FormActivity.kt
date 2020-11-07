@@ -1,4 +1,5 @@
-package com.example.medconnect
+package com.example.medconnect.ui
+
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.medconnect.R
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 import kotlin.collections.HashMap
@@ -41,7 +43,7 @@ class FormActivity : AppCompatActivity() {
                 ref.setValue(map).addOnCompleteListener {
                     if(it.isSuccessful){
                         Toast.makeText(this,"Patient Record Successfully Added",Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this,HospitalActivity::class.java))
+                        startActivity(Intent(this, HospitalActivity::class.java))
                         finish()
                     }
                     else{
