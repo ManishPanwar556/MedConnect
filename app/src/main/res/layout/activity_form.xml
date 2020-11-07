@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:layout_marginTop="40px">
+      <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:id="@+id/profile"
+          android:src="@drawable/profile"
+          android:layout_gravity="center"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Enter Full Name"
+          android:id="@+id/nameEditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Enter Age"
+          android:id="@+id/ageEditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Enter Sex"
+          android:id="@+id/sexEditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Enter Date"
+          android:id="@+id/dateEditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Enter time"
+          android:id="@+id/timeeditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Enter Address"
+          android:inputType="textPostalAddress"
+          android:id="@+id/addressEditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:layout_gravity="center"
+          android:hint="Contact Number"
+          android:inputType="phone"
+          android:minEms="10"
+          android:id="@+id/contactEditText"/>
+      <com.google.android.material.button.MaterialButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:backgroundTint="#1ACDCD"
+          app:cornerRadius="40px"
+          android:text="Save Details"
+          android:layout_marginTop="30px"
+          android:id="@+id/saveBtn"
+          android:layout_gravity="center"/>
+  </LinearLayout>
+</ScrollView>

@@ -9,19 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedConnect">
-        <activity android:name=".SignInActivity"></activity>
-        <activity android:name=".PatientActivity" />
-        <activity android:name=".DoctorActivity" />
-        <activity android:name=".IntroActivity">
+        <activity android:name=".FormActivity"></activity>
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/noactionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HospitalActivity">
-
-        </activity>
+        <activity android:name=".SignInActivity"
+            android:label="SignIn"/>
+        <activity android:name=".PatientActivity"
+            android:label="DashBoard"/>
+        <activity android:name=".DoctorActivity"
+            android:label="DashBoard"/>
+        <activity android:name=".IntroActivity"
+            android:label="DashBoard"></activity>
+        <activity android:name=".HospitalActivity"
+            android:label="DashBoard"/>
     </application>
 
 </manifest>
