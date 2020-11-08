@@ -12,5 +12,13 @@ data class UserEntity(
     var time: String?,
     var age: String?,
     var date: String?,
+    val symptoms:String?,
     var uid:String
+)
+@Entity
+data class MessageEntity(
+    var message:String?,
+    @PrimaryKey(autoGenerate = true)
+    var id:Long=0L
+
 )

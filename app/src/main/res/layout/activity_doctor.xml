@@ -11,6 +11,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="400px"
+        android:visibility="invisible"
         android:id="@+id/cardView"
         android:layout_margin="30px"
         app:cardCornerRadius="20px">
@@ -115,17 +116,19 @@
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/cardView2"
-        android:id="@+id/rev"/>
-    <androidx.cardview.widget.CardView
+        android:visibility="invisible"
+        android:id="@+id/listView"/>
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="450px"
         android:id="@+id/cardView2"
         android:layout_margin="40px"
-        android:layout_below="@+id/cardView">
+        android:layout_below="@+id/cardView"
+        android:visibility="invisible">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -148,7 +151,7 @@
                 android:layout_marginTop="20px"
                 />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
@@ -159,6 +162,7 @@
         app:cornerRadius="40px"
         android:layout_margin="70px"
         android:id="@+id/prescribebtn"
+        android:visibility="invisible"
         android:layout_gravity="end|bottom"
         />
     <TextView

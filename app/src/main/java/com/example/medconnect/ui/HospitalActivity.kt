@@ -27,9 +27,7 @@ class HospitalActivity : AppCompatActivity() {
         addbutton.setOnClickListener {
             startActivity(Intent(this, FormActivity::class.java))
         }
-        logoutbtn.setOnClickListener {
 
-        }
     }
     private fun performLogout(){
         AuthUI.getInstance().signOut(this).addOnCompleteListener {

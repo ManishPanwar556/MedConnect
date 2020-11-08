@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import com.example.medconnect.R
 import com.example.medconnect.room.UserEntity
 import com.example.medconnect.viewModel.UserViewModel
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -38,10 +39,10 @@ class PatientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient)
-        viewModel.properties.observe(this, Observer { list ->
-            list.forEach {
+        viewModel.property.observe(this, Observer {
+
                 applyData(it.name, it.address, it.contact, it.date, it.age, it.sex, it.time)
-            }
+
 
         })
 
@@ -49,8 +50,12 @@ class PatientActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.barCode -> {
+            R.id.scancode -> {
                 openCamera()
+                true
+            }
+            R.id.logoutmenu2 -> {
+                logout()
                 true
             }
             else -> {
@@ -61,7 +66,7 @@ class PatientActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_item, menu)
+        inflater.inflate(R.menu.menu_item_barcode,menu)
         return true
     }
 
@@ -81,6 +86,17 @@ class PatientActivity : AppCompatActivity() {
             getDataFromQrCode(imageBitmap)
         }
 
+    }
+
+    private fun logout() {
+        AuthUI.getInstance().signOut(this).addOnCompleteListener {
+            if (it.isSuccessful) {
+                startActivity(Intent(this, IntroActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "Error in logging out", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun getDataFromQrCode(imageBitmap: Bitmap) {
@@ -116,10 +132,21 @@ class PatientActivity : AppCompatActivity() {
                     val age = snapshot.child("age").value?.toString()
                     val sex = snapshot.child("sex").value?.toString()
                     val time = snapshot.child("time").value?.toString()
+                    val symptoms = snapshot.child("symptoms").value?.toString()
                     Toast.makeText(this@PatientActivity, "$name", Toast.LENGTH_SHORT).show()
                     val user =
-                        UserEntity(name, sex, address, contact, time, age, date, displayValue)
-                    viewModel.insertData(user)
+                        UserEntity(
+                            name,
+                            sex,
+                            address,
+                            contact,
+                            time,
+                            age,
+                            date,
+                            symptoms,
+                            displayValue
+                        )
+                    viewModel.insertData(user,displayValue)
 
                 }
 
