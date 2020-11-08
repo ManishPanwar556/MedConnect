@@ -4,6 +4,8 @@ package com.example.medconnect.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -26,15 +28,34 @@ class HospitalActivity : AppCompatActivity() {
             startActivity(Intent(this, FormActivity::class.java))
         }
         logoutbtn.setOnClickListener {
-            AuthUI.getInstance().signOut(this).addOnCompleteListener {
-                if(it.isSuccessful){
-                    val intent=Intent(this, IntroActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                else{
-                    Toast.makeText(this,"Error",Toast.LENGTH_LONG).show()
-                }
+
+        }
+    }
+    private fun performLogout(){
+        AuthUI.getInstance().signOut(this).addOnCompleteListener {
+            if(it.isSuccessful){
+                val intent=Intent(this, IntroActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            else{
+                Toast.makeText(this,"Error",Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_logout,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.logoutmenu->{
+                performLogout()
+                true
+            }
+            else->{
+                super.onOptionsItemSelected(item)
             }
         }
     }
