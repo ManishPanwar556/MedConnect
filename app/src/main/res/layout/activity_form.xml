@@ -66,6 +66,13 @@
           android:inputType="phone"
           android:minEms="10"
           android:id="@+id/contactEditText"/>
+      <EditText
+          android:layout_width="800px"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80px"
+          android:id="@+id/sypmtomsEditText"
+          android:layout_gravity="center"
+          android:hint="Symptoms"/>
       <com.google.android.material.button.MaterialButton
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

@@ -24,8 +24,9 @@ class FormActivity : AppCompatActivity() {
         val address = findViewById<EditText>(R.id.addressEditText)
         val contact = findViewById<EditText>(R.id.contactEditText)
         val age = findViewById<EditText>(R.id.ageEditText)
+        val symptoms=findViewById<EditText>(R.id.sypmtomsEditText)
         saveButton.setOnClickListener {
-            if (name.text.isEmpty() || sex.text.isEmpty() || date.text.isEmpty() || time.text.isEmpty() || address.text.isEmpty() || contact.text.isEmpty() || age.text.isEmpty()||contact.text.toString().length!=10) {
+            if (symptoms.text.isEmpty()||name.text.isEmpty() || sex.text.isEmpty() || date.text.isEmpty() || time.text.isEmpty() || address.text.isEmpty() || contact.text.isEmpty() || age.text.isEmpty()||contact.text.toString().length!=10) {
                 Toast.makeText(this,"Fill The Empty Field",Toast.LENGTH_SHORT).show()
             }
             else{
@@ -39,6 +40,7 @@ class FormActivity : AppCompatActivity() {
                 map.put("address",address.text.toString())
                 map.put("age",age.text.toString())
                 map.put("contact",contact.text.toString())
+                map.put("symptoms",symptoms.text.toString())
                 val ref=database.getReference().child("Patients").child("$uuid")
                 ref.setValue(map).addOnCompleteListener {
                     if(it.isSuccessful){

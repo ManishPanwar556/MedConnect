@@ -30,6 +30,7 @@ class PatientActivity : AppCompatActivity() {
     companion object {
         const val REQUEST_IMAGE_CAPTURE = 1
     }
+
     val viewModel by lazy {
         UserViewModel(application)
     }
@@ -37,9 +38,9 @@ class PatientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient)
-        viewModel.properties.observe(this, Observer {list->
+        viewModel.properties.observe(this, Observer { list ->
             list.forEach {
-                applyData(it.name,it.address,it.contact,it.date,it.age,it.sex,it.time)
+                applyData(it.name, it.address, it.contact, it.date, it.age, it.sex, it.time)
             }
 
         })
@@ -47,19 +48,20 @@ class PatientActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.barCode ->{
+        return when (item.itemId) {
+            R.id.barCode -> {
                 openCamera()
                 true
             }
-            else ->{
+            else -> {
                 super.onOptionsItemSelected(item)
             }
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater=menuInflater
-        inflater.inflate(R.menu.menu_item,menu)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_item, menu)
         return true
     }
 
@@ -103,43 +105,53 @@ class PatientActivity : AppCompatActivity() {
 
         if (displayValue != null) {
             val firebaseDatabase =
-                FirebaseDatabase.getInstance().getReference().child("Patients").child("$displayValue")
+                FirebaseDatabase.getInstance().getReference().child("Patients")
+                    .child("$displayValue")
             firebaseDatabase.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val name=snapshot.child("name").value?.toString()
+                    val name = snapshot.child("name").value?.toString()
                     val address = snapshot.child("address").value?.toString()
                     val contact = snapshot.child("contact").value?.toString()
                     val date = snapshot.child("date").value?.toString()
                     val age = snapshot.child("age").value?.toString()
                     val sex = snapshot.child("sex").value?.toString()
                     val time = snapshot.child("time").value?.toString()
-                    Toast.makeText(this@PatientActivity,"$name",Toast.LENGTH_SHORT).show()
-                    val user=UserEntity(name,sex,address,contact,time,age,date,displayValue)
+                    Toast.makeText(this@PatientActivity, "$name", Toast.LENGTH_SHORT).show()
+                    val user =
+                        UserEntity(name, sex, address, contact, time, age, date, displayValue)
                     viewModel.insertData(user)
 
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                   Toast.makeText(this@PatientActivity,"${error}",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@PatientActivity, "${error}", Toast.LENGTH_LONG).show()
                 }
 
             })
         }
     }
 
-    private fun applyData(pname: String?, address: String?, contact: String?, patientDate: String?, patientAge: String?, patientSex: String?, time: String?) {
-        val cardView=findViewById<MaterialCardView>(R.id.cardView)
-        val profile=findViewById<ImageView>(R.id.profile)
-        cardView.visibility= View.VISIBLE
-        profile.visibility=View.VISIBLE
-        val name=findViewById<TextView>(R.id.patientName)
-        val age=findViewById<TextView>(R.id.patientAge)
-        val sex=findViewById<TextView>(R.id.patientSex)
-        val date=findViewById<TextView>(R.id.patientDate)
-        name.text=pname
-        age.text=patientAge
-        sex.text=patientSex
-        date.text=patientDate
+    private fun applyData(
+        pname: String?,
+        address: String?,
+        contact: String?,
+        patientDate: String?,
+        patientAge: String?,
+        patientSex: String?,
+        time: String?
+    ) {
+        val cardView = findViewById<MaterialCardView>(R.id.cardView)
+        val profile = findViewById<ImageView>(R.id.profile)
+        cardView.visibility = View.VISIBLE
+        profile.visibility = View.VISIBLE
+        val name = findViewById<TextView>(R.id.patientName)
+        val age = findViewById<TextView>(R.id.patientAge)
+        val sex = findViewById<TextView>(R.id.patientSex)
+        val date = findViewById<TextView>(R.id.patientDate)
+        name.text = pname
+        age.text = patientAge
+        sex.text = patientSex
+        date.text = patientDate
     }
 
 }
