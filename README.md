@@ -6,8 +6,7 @@ Technology Used
 4. Material library
 
 # Screenshots
-![images](https://user-images.githubusercontent.com/53398805/135499309-5783bc88-a239-491c-9c15-69c49ea71732.png)  
-![images](https://user-images.githubusercontent.com/53398805/135499338d622ce1c-f41a-467b-a458-4ba09fa7a6e8.png)
-![images](https://user-images.githubusercontent.com/53398805/135499355-d852facb-ee34-449b-922e-393dec05b2ac.png)
-
+![image](https://user-images.githubusercontent.com/53398805/135501165-0bc438ad-89b5-44fb-995e-e00023c8f2f2.png)
+![image](https://user-images.githubusercontent.com/53398805/135501209-664f40d0-c2aa-4ef3-806c-076726f68966.png)
+![image](https://user-images.githubusercontent.com/53398805/135501242-06818fee-c2e0-49af-ad51-a43aa1003806.png)
 
